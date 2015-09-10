@@ -1,28 +1,41 @@
-<table class="index">
+<table class="table">
   <thead>
   	<tr>
   	  <th><%= Spree.t(:sku) %></th>
   		<th><%= Spree.t(:name) %></th>
   		<th><%= Spree.t(:options) %></th>
   		<th><%= Spree.t(:qty) %></th>
+		<th><%= Spree.t(:action)%></th>
   	</tr>
   </thead>
   <tbody>
     <% parts.each do |part| %>
       <tr id="<%= dom_id(part, :sel)%>">
         <td><%= part.sku %></td>
-        <td><%= part.name %></td>
+        <td><%= link_to part.name, edit_admin_product_path(part.part_id) %></td>
         <td><%= variant_options part %></td>
-        <td><%= text_field_tag :count, part.count %></td>
+        <td><%= text_field_tag :count, part.count, :size=>5 %></td>
   	    <td class="actions">
           <%= image_tag "spinner.gif", :style => "display:none", :class => "spinner" %>
-          <%= link_to(icon('edit'),
-                      set_count_admin_product_part_url(product, part),
-                      :class => "set_count_admin_product_part_link fa fa-ok no-text") %>
 
-          <%= link_to(icon('delete'), 
-                      remove_admin_product_part_url(product, part),
-                      :class => "remove_admin_product_part_link fa fa-trash no-text") %>
+		<%= link_to_with_icon('edit', 
+				Spree.t(:edit), 
+				set_count_admin_product_part_url(product, part),
+				{
+					:class=>'btn btn-primary btn-sm set_count_admin_product_part_link fa fa-ok no-text',
+					:data => { action: 'edit' }
+				}
+			) if can?(:destroy, part) %>
+			
+		<%= link_to_with_icon('delete', 
+				'Remove', 
+				remove_admin_product_part_url(product, part),
+				{
+					:class=>'btn btn-danger btn-sm delete-resource remove_admin_product_part_link fa fa-trash no-text',
+					:data => { confirm: Spree.t(:are_you_sure), action: 'remove' }
+				}
+			) if can?(:destroy, part) %>
+
   	    </td>        
       </tr>
     <% end %>

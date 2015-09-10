@@ -10,9 +10,18 @@
 </div>
 
 <%= form_tag('#') do %>
-  <label><%= Spree.t(:search) %>:</label>
-  <input id="searchtext" size="25">
-  <button id="search_parts_button" class="fa fa-search button" name="button">Search</button>
+
+<div class="row">
+  <div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" id="searchtext" class="form-control" placeholder="<%= Spree.t(:search) %>">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" id="search_parts_button" name="button"><%=Spree.t(:search)%></button>
+      </span>
+    </div>
+  </div>
+</div>
+
 <% end %>
 
 <br/>
