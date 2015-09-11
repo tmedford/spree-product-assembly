@@ -1,11 +1,11 @@
 <table class="index">
   <thead>
-  	<tr>
-  	  <th><%= Spree.t(:sku) %></th>
-  		<th><%= Spree.t(:name) %></th>
-  		<th><%= Spree.t(:options) %></th>
-  		<th><%= Spree.t(:qty) %></th>
-  	</tr>
+    <tr>
+      <th><%= Spree.t(:sku) %></th>
+      <th><%= Spree.t(:name) %></th>
+      <th><%= Spree.t(:options) %></th>
+      <th><%= Spree.t(:qty) %></th>
+    </tr>
   </thead>
   <tbody>
     <% parts.each do |part| %>
@@ -13,8 +13,8 @@
         <td><%= part.sku %></td>
         <td><%= part.name %></td>
         <td><%= variant_options part %></td>
-        <td><%= text_field_tag :count, part.count %></td>
-  	    <td class="actions">
+        <td><%= number_field_tag :count, part.count, :class => 'input-sm form-control', :style => 'width: 70px;'  %></td>
+        <td class="actions">
           <%= image_tag "spinner.gif", :style => "display:none", :class => "spinner" %>
           <%= link_to(icon('edit'),
                       set_count_admin_product_part_url(product, part),
@@ -23,7 +23,7 @@
           <%= link_to(icon('delete'), 
                       remove_admin_product_part_url(product, part),
                       :class => "remove_admin_product_part_link fa fa-trash no-text") %>
-  	    </td>        
+        </td>        
       </tr>
     <% end %>
     <% if parts.empty? %>
