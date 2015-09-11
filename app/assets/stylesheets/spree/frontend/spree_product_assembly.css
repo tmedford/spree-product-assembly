@@ -1,3 +1,10 @@
 /*
  *= require spree/frontend
 */
+
+#product_parts td.actions a.btn {
+  margin:2px;
+}
+#product_parts td.actions {
+  text-align:center;
+}
